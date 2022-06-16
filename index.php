@@ -49,7 +49,6 @@
         $res = mysqli_query($link, $sql) or die(mysqli_error());
         $categories = "";
 
-
         if( mysqli_num_rows($res) > 0){
             while($row = mysqli_fetch_assoc($res)){
                 $id = $row['id'];
