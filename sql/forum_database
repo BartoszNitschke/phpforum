@@ -1,0 +1,201 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1-dev+20220609.d7304c1996
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Jun 23, 2022 at 02:45 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `forum`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` tinyint(4) NOT NULL,
+  `category_title` varchar(150) NOT NULL,
+  `category_description` varchar(255) DEFAULT NULL,
+  `last_post_date` datetime NOT NULL,
+  `last_user_posted` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `category_title`, `category_description`, `last_post_date`, `last_user_posted`) VALUES
+(1, 'Alkohole', 'Piwo czy wódka?', '2022-06-12 20:43:43', 'wacek'),
+(2, 'Random Forum', 'This is a random forum', '2022-06-14 18:44:42', 'andrzej'),
+(3, 'Motoryzacja', 'Fani czterech kółek i nie tylko!', '2022-06-15 18:32:06', NULL),
+(4, 'Gotowanie', 'Podziel się twoim najlepszym przepisem!', '2022-06-15 18:32:06', NULL),
+(5, 'Języki obce', 'Dyskutuj w innym języku!', '2022-06-15 18:35:46', NULL),
+(6, 'Gry komputerowe', 'Szukaj znajomych do gry lub zapytaj jak przejść Elden Ringa.', '2022-06-15 18:35:46', NULL),
+(7, 'Administracja', 'Sprawy do administracji serwisu.', '2022-06-16 14:30:32', 'wacek'),
+(8, 'Inne', 'Twoje pytanie nie zalicza się do żadnej kategorii? Zadaj je tutaj!', '2022-06-15 18:38:29', NULL),
+(9, 'Filmy i seriale', 'Tylko bez spoilerów!!!', '2022-06-23 14:39:28', 'andrzej'),
+(10, 'Sport', 'Sekcja dla sportowych świrów.', '2022-06-15 18:39:51', NULL),
+(11, 'Zdrowie', 'Dręczą cię jakieś problemy zdrowotne? Pytaj!', '2022-06-15 18:43:29', NULL),
+(12, 'Muzyka', 'Pokaż co tam gra na słuchaweczkach.', '2022-06-15 18:43:29', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `category_id` tinyint(4) NOT NULL,
+  `topic_id` int(11) NOT NULL,
+  `post_creator` varchar(20) NOT NULL,
+  `post_content` text NOT NULL,
+  `post_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `category_id`, `topic_id`, `post_creator`, `post_content`, `post_date`) VALUES
+(2, 1, 5, '2', 'elo ', '2022-06-12 15:27:22'),
+(9, 2, 3, '2', 'co to jest', '2022-06-12 17:21:54'),
+(10, 1, 5, '2', 'random bruce ot kox', '2022-06-12 17:22:34'),
+(16, 2, 10, 'siema', 'to jest zmiana w koncu tego gowna', '2022-06-12 17:55:03'),
+(18, 2, 10, 'siema', 'sieman----------', '2022-06-12 17:56:48'),
+(21, 1, 11, 'siema', 'to jest se dla zabawy zeby sprawdzic username', '2022-06-12 17:57:40'),
+(37, 7, 17, 'wacek', 'pytanie jak u góry', '2022-06-15 20:31:38'),
+(38, 7, 18, 'wacek', 'pls help', '2022-06-15 21:29:09'),
+(44, 7, 19, 'wacek', 'uważacie że admini tego forum są spoko?', '2022-06-16 14:30:32'),
+(45, 9, 20, 'andrzej', 'slaby ten sezon 8 co nie', '2022-06-23 14:11:46'),
+(48, 9, 20, 'andrzej', 'no byl taki sobie', '2022-06-23 14:39:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `topics`
+--
+
+CREATE TABLE `topics` (
+  `id` int(11) NOT NULL,
+  `category_id` tinyint(4) NOT NULL,
+  `topic_title` varchar(150) NOT NULL,
+  `topic_creator` varchar(20) NOT NULL,
+  `topic_date` datetime NOT NULL,
+  `topic_reply_date` datetime NOT NULL,
+  `topic_views` int(11) NOT NULL DEFAULT 0,
+  `topic_replies` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `topics`
+--
+
+INSERT INTO `topics` (`id`, `category_id`, `topic_title`, `topic_creator`, `topic_date`, `topic_reply_date`, `topic_views`, `topic_replies`) VALUES
+(5, 1, 'random bruce', '2', '2022-06-12 15:27:22', '2022-06-12 17:57:20', 10, 0),
+(10, 2, 'drugi test na username', 'siema', '2022-06-12 17:55:03', '2022-06-14 18:33:58', 54, 3),
+(11, 1, 'nastpeny topic tak dla zabawy', 'siema', '2022-06-12 17:57:40', '2022-06-12 17:57:40', 5, 0),
+(17, 7, 'jak utworzyć post', 'wacek', '2022-06-15 20:31:38', '2022-06-16 14:21:49', 10, 0),
+(18, 7, 'Jak dodac komentarz', 'wacek', '2022-06-15 21:29:09', '2022-06-16 14:21:34', 58, 3),
+(19, 7, 'jaka jest administracja', 'wacek', '2022-06-16 14:30:32', '2022-06-16 14:30:32', 1, 0),
+(20, 9, 'Gra o tron', 'andrzej', '2022-06-23 14:11:46', '2022-06-23 14:39:28', 9, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `role` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
+(1, 'wacek', 'placek', 1),
+(2, 'siema', '123', 2),
+(5, 'andrzej', 'dobosz', 0),
+(6, 'bubcio33', '121212', 0),
+(9, 'Random', 'bruce11', 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `topics`
+--
+ALTER TABLE `topics`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `topics`
+--
+ALTER TABLE `topics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
