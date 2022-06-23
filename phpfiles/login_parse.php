@@ -15,7 +15,8 @@ if(isset($_POST['username'])){
         $_SESSION['role'] = $row['role'];
         header("Location: index.php");
         exit();
-    }else{
+    }
+    else{
         echo "Niepoprawny login lub hasło, powróć do strony głównej i spróbuj ponownie";
         exit();
     }
