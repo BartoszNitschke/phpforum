@@ -16,6 +16,7 @@
 <body>
 
 <div class="wrapper">
+    
     <div class="top"></div>
     <h1 class="title">Forum internetowe</h1>
     <p style="color: white">Dyskutuj na każdy temat!</p>
