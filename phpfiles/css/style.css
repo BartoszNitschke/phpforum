@@ -1,0 +1,96 @@
+body{
+    background-color: rgba(79, 76, 76, 0.78);
+}
+
+.wrapper h1{
+    margin-top: 20px;
+    font-size: 42px;
+    text-align: center;
+    color: white;
+}
+
+theme a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.top{
+    height: 15px;
+}
+
+.wrapper p{
+    font-size: 22px;
+    text-align: center;
+
+}
+p{
+    font-size: 22px;
+    text-decoration: none;
+    color: inherit;
+}
+.intro{
+    padding-bottom: 5px;
+}
+
+.left{
+    float: left;
+    color: white;
+    font-size: 22px;
+
+}
+
+.right{
+    text-align: right;
+    color: white;
+    font-size: 26px;
+    margin-right: 10px;
+}
+.right a{
+    text-decoration: none;
+    color: inherit;
+}
+.login{
+    float: left;
+    color: white;
+    font-size: 18px;
+
+}
+.form-control{
+    float: left;
+    color: white;
+    width: 250px;
+}
+
+.category{
+    display: block;
+    padding: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    background-color: #cccccc;
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+
+}
+
+.category:hover{
+    background-color: #dddddd;
+}
+
+question:hover{
+    background-color: #dddddd;
+}
+
+
+.footer{
+    height: 60px;
+    width: auto;
+    color: white;
+    margin-top: 40px;
+    font-size: 22px;
+    text-align: center;
+
+
+}
