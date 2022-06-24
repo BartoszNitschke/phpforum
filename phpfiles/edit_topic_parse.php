@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION['uid'] && isset($_POST['edit_content'])){
-    
+
         include_once ("connection.php");
         $cid = $_POST['cat_id'];
         $tid = $_POST['top_id'];
@@ -53,12 +53,13 @@ if($_SESSION['uid'] && isset($_POST['edit_content'])){
 
 
         if (($res)) {
-            echo "<p>Edytowano zawartość <a href='view_topic.php?cid=".$obj->getCatId()."&tid=".$obj->getTopId()."'>Kliknij by wrócić do posta</a></p>";
+            header("Location: view_topic.php?cid=".$obj->getCatId()."&tid=".$obj->getTopId()."");
+            exit();
         } else {
             echo "<p>Wystąpił problem z usunięciem wątku.Spróbuj ponownie</p></br><a href='view_topic.php?cid=".$obj->getCatId()."&tid=".$obj->getTopId()."'>Kliknij by wrócić do posta</a>";
         }
 
- 
+
 }else{
     header("Location: index.php");
     exit();
