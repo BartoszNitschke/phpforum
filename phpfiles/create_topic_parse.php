@@ -8,7 +8,7 @@ if (isset($_POST['topic_submit'])){
     if(($_POST['topic_title'] == "") && ($_POST['topic_content'] == "")){
         echo"Nie wypełniono obu pól. Spróbuj ponownie.";
         exit();
-    }else{
+    }
         include_once ("connection.php");
         $cid = $_POST['cid'];
         $title = $_POST['topic_title'];
@@ -49,7 +49,7 @@ if (isset($_POST['topic_submit'])){
             echo"Wystąpił problem z utworzeniem pytania. Spróbuj ponownie";
         }
 
-    }
+    
 }
 
 
