@@ -1,7 +1,7 @@
 <?php
 session_start();
-if($_SESSION['uid']){
-    if(isset($_POST['delete'])){
+if(($_SESSION['uid']) && isset($_POST['delete'])){
+    
         include_once ("connection.php");
         $cid = $_POST['cat_id'];
         $id = $_POST['top_id'];
@@ -38,9 +38,7 @@ if($_SESSION['uid']){
             echo "<p>Wystąpił problem z usunięciem wątku.Spróbuj ponownie</p></br><a href='view_topic.php?cid=".$obj->cat_id."&tid=".$obj->top_id."'>Kliknij by wrócić do posta</a>";
         }
 
-    }else{
-        exit();
-    }
+    
 }else{
     header("Location: index.php");
     exit();
