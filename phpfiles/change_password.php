@@ -1,7 +1,6 @@
 <?php
 session_start();
-if($_SESSION['uid']){
-    if(isset($_POST['password_button'])){
+if(($_SESSION['uid']) && isset($_POST['password_button'])){
         include_once ("connection.php");
 
         $password = $_POST['password'];
@@ -33,9 +32,6 @@ if($_SESSION['uid']){
                 echo "<p>Wystąpił problem ze zmianą hasła.Spróbuj ponownie</p></br><a href='settings.php'>Kliknij by wrócić do ustawień</a>";
             }
         }
-    }else{
-        exit();
-    }
 }else{
     header("Location: index.php");
     exit();
