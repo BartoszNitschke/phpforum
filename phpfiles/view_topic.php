@@ -54,8 +54,8 @@
        $tid = $_GET['tid'];
        $sql = "SELECT * FROM topics WHERE category_id='".$cid."' AND id='".$tid."' LIMIT 1";
        $res = mysqli_query($link,$sql) or die(mysqli_error());
-       if(isset($_SESSION['uid'])) {
-           if ($_SESSION['role'] == 1 || $_SESSION['role'] == 2) {
+       if(isset($_SESSION['uid']) && ($_SESSION['role'] == 1 || $_SESSION['role'] == 2)) {
+
                echo "<div style='padding-bottom: 10px;'><form action='delete_post.php' method='post'>
             <input type='hidden' name='top_id' value='" . $tid . "'>
             <input type='hidden' name='cat_id' value='" . $cid . "'>
@@ -64,7 +64,7 @@
 ";
 
 
-           }
+
        }
 
 
@@ -78,8 +78,8 @@
                    echo "<tr><td valign='top' style='border: 1px solid #000000; background-color: #cccccc;'><div style='min-height: 125px;'><b>Temat: ".$row['topic_title']."</b><br/>
                    by <b>".$row2['post_creator']."</b> - ".$row2['post_date']."<hr/>".$row2['post_content']."</div></td></tr>
                    <tr><td colspan='2'>";
-                   if(isset($_SESSION['uid'])) {
-                       if ($_SESSION['role'] == 1) {
+                   if(isset($_SESSION['uid']) && ($_SESSION['role'] == 1)) {
+
                            if ($i != 1) {
                                echo "<div style='display: flex;'><div style='padding-right: 10px;'><form action='delete_comment.php' method='post'>
                             <input type='hidden' name='top_id' value='" . $row2['topic_id'] . "'>
@@ -104,7 +104,7 @@
 
 
 
-                       if ($_SESSION['role'] == 2) {
+                        if(isset($_SESSION['uid']) && ($_SESSION['role'] == 2)) {
                            if ($i != 1) {
                                echo "<form action='delete_comment.php' method='post'>
                             <input type='hidden' name='top_id' value='" . $row2['topic_id'] . "'>
@@ -160,6 +160,9 @@
                $sql3 = "UPDATE topics SET topic_views='".$new_views."' WHERE category_id='".$cid."' AND id='".$tid."' LIMIT 1";
                $res3 = mysqli_query($link, $sql3) or die(mysqli_error());
            }
+       else{
+           echo"<p>This topic does not exist. </p>";
+       }
            echo "</table>";
            if(isset($_SESSION['uid'])){
                echo "<tr><td colspan='2'><input class='btn btn-light' type='submit' value='Skomentuj' onClick=\"window.location = 'post_reply.php?cid=".$cid."&tid=".$tid."'\"/><hr/>";
@@ -167,9 +170,7 @@
            else{
                echo "<tr><td colspan='2'><p style='color: white; font-size: 22px;'>Zaloguj się, aby dodać odpowiedź</p></td></tr>";
            }
-       }else{
-           echo"<p>This topic does not exist. </p>";
-       }
+       
 
        ?>
 
