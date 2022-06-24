@@ -1,8 +1,7 @@
 <?php
 session_start();
-if($_SESSION['uid']){
-    if(isset($_POST['name_button'])){
-        include_once ("connection.php");
+if(($_SESSION['uid']) && isset($_POST['name_button'])){
+    include_once ("connection.php");
 
         $login = $_POST['username'];
         $id = $_SESSION['uid'];
@@ -34,9 +33,6 @@ if($_SESSION['uid']){
                 echo "<p>Wystąpił problem ze zmianą loginu.Spróbuj ponownie</p></br><a href='settings.php'>Kliknij by wrócić do ustawień</a>";
             }
         }
-    }else{
-        exit();
-    }
 }else{
     header("Location: index.php");
     exit();
