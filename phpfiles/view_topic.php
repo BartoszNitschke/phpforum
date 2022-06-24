@@ -72,14 +72,21 @@
             while($row = mysqli_fetch_assoc($res)){
                 $sql2 = "SELECT * FROM posts WHERE category_id='".$cid."' AND topic_id='".$tid."'";
                 $res2 = mysqli_query($link,$sql2) or die(mysqli_error());
+
+
                 $i=1;
                 while($row2 = mysqli_fetch_assoc($res2)){
+                    $sql4 = "SELECT username FROM users WHERE id='".$row2['post_creator']."'";
+                    $res4 = mysqli_query($link,$sql4) or die(mysqli_error());
+                    $c = mysqli_fetch_assoc($res4);
+                    $creator = $c['username'];
+
                     echo "<tr><td valign='top' style='border: 1px solid #000000; background-color: #cccccc;'><div style='min-height: 125px;'><b>Temat: ".$row['topic_title']."</b><br/>
-                   by <b>".$row2['post_creator']."</b> - ".$row2['post_date']."<hr/>".$row2['post_content']."</div></td></tr>
+                   by <b>".$creator."</b> - ".$row2['post_date']."<hr/>".$row2['post_content']."</div></td></tr>
                    <tr><td colspan='2'>";
                     if(isset($_SESSION['uid'])) {
 
-                        
+
                         if ($_SESSION['role'] == 1) {
                             if ($i != 1) {
                                 echo "<div style='display: flex;'><div style='padding-right: 10px;'><form action='delete_comment.php' method='post'>
@@ -138,6 +145,7 @@
                             <input type='hidden' name='cat_id' value='" . $row2['category_id'] . "'>
                             <input type='hidden' name='post_id' value='" . $row2['id'] . "'>
                             <input type='hidden' name='post_content' value='" . $row2['post_content'] . "'>
+                            
                            <input type='submit' name='edit_topic_button' value='Edytuj zawartość' class='btn btn-light'>
 </form>";
 

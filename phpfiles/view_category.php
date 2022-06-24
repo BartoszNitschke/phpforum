@@ -78,6 +78,11 @@ $cid = "";
                     $creator = $row['topic_creator'];
                     $replies = $row['topic_replies'];
 
+                    $sql4 = "SELECT username FROM users WHERE id='".$creator."'";
+                    $res4 = mysqli_query($link,$sql4) or die(mysqli_error());
+                    $c = mysqli_fetch_assoc($res4);
+                    $creator2 = $c['username'];
+
 
                     $topics .= "<div>
                                 <tr style='background-color: #cccccc;'>
@@ -86,7 +91,7 @@ $cid = "";
                                 href='view_topic.php?cid=".$cid."&tid=".$tid."'>".$title."</a>
                                 <br/>
                                 <span>
-                    Utworzone przez: <b>".$creator."</b> w dniu ".$date."
+                    Utworzone przez: <b>".$creator2."</b> w dniu ".$date."
                                 </span>
                                 </td>
                     <td align='center'><b>$replies</b></td>
