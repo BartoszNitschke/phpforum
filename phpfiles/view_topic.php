@@ -148,6 +148,11 @@
 
 
                        }
+                   $old_views = $row['topic_views'];
+                   $new_views = $old_views + 1;
+                   $sql3 = "UPDATE topics SET topic_views='".$new_views."' WHERE category_id='".$cid."' AND id='".$tid."' LIMIT 1";
+                   $res3 = mysqli_query($link, $sql3) or die(mysqli_error());
+
                    }
 
                    $i++;
@@ -155,10 +160,7 @@
 
 
                }
-               $old_views = $row['topic_views'];
-               $new_views = $old_views + 1;
-               $sql3 = "UPDATE topics SET topic_views='".$new_views."' WHERE category_id='".$cid."' AND id='".$tid."' LIMIT 1";
-               $res3 = mysqli_query($link, $sql3) or die(mysqli_error());
+
            }
        else{
            echo"<p>This topic does not exist. </p>";
@@ -170,7 +172,7 @@
            else{
                echo "<tr><td colspan='2'><p style='color: white; font-size: 22px;'>Zaloguj się, aby dodać odpowiedź</p></td></tr>";
            }
-       
+
 
        ?>
 
