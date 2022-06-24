@@ -1,7 +1,7 @@
 <?php
 session_start();
-if($_SESSION['uid']){
-    if(isset($_POST['reply_submit'])){
+if($_SESSION['uid'] && isset($_POST['reply_submit'])){
+    
         include_once ("connection.php");
         $creator = $_SESSION['username'];
         $cid = $_POST['cid'];
@@ -68,9 +68,7 @@ if($_SESSION['uid']){
             echo "<p>Wystąpił problem z opublikowaniem twojego komentarza. Spróbuj ponownie później</p>";
         }
 
-    }else{
-        exit();
-    }
+   
 }else{
     exit();
 }
